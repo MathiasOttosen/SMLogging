@@ -15,7 +15,7 @@
         {
             Level = level;
             this.message = message;
-            this.Exception = exception;
+            Exception = exception;
         }
 
         public LogEvent(Exception exception) : this(Level.Verbose, string.Empty, exception) { }
@@ -25,5 +25,10 @@
         public LogEvent(string message) : this(Level.Verbose, message, new Exception()) { }
 
         public LogEvent() : this(Level.Verbose, string.Empty, new Exception()) { }
+
+        public override string ToString()
+        {
+            return level.ToString() + message + exception;
+        }
     }
 }
