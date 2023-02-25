@@ -35,6 +35,19 @@ namespace UnitTestSMLogging
             Assert.Equal(message, logEvent.Message);
         }
 
+        [Fact]
+        public void LogEvent_ConstructWithException_ShouldHaveException()
+        {
+            // Arrange 
+            Exception exception = new Exception();
+
+            // Act
+            var logEvent = new LogEvent(exception);
+
+            // Assert
+            Assert.Equal(exception, logEvent.Exception);
+        }
+
        
     }
 }
