@@ -14,12 +14,27 @@ namespace UnitTestSMLogging
         public void LogEvent_ConstructWithLevel_ShouldHaveLevel(Level level)
         {
             //Arrange
-            var logEvent = new LogEvent(level);
 
             //Act
+            var logEvent = new LogEvent(level);
 
             //Assert
             Assert.Equal(level, logEvent.Level);
         }
+
+        [Fact]
+        public void LogEvent_ConstructWithMessage_ShouldHaveMessage()
+        {
+            // Arrange
+            const string message = "message";
+
+            // Act
+            var logEvent = new LogEvent(message);
+
+            // Assert
+            Assert.Equal(message, logEvent.Message);
+        }
+
+       
     }
 }
