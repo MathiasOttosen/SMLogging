@@ -14,7 +14,7 @@ namespace UnitTestSMLogging
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var jsonLoggerOutput = new JsonLoggerOutput(path);
             File.Delete(jsonLoggerOutput.Path);
-            var logEvent = new LogEvent(Level.Information, "1");
+            var logEvent = new LogEvent(Level.Information, "1", new Exception("ex1"));
             var expectedContent = JsonConvert.SerializeObject(logEvent, Formatting.Indented);
 
             // Act
@@ -36,8 +36,8 @@ namespace UnitTestSMLogging
             var path = AppDomain.CurrentDomain.BaseDirectory;
             var jsonLoggerOutput = new JsonLoggerOutput(path);
             File.Delete(jsonLoggerOutput.Path);
-            var logEvent = new LogEvent(Level.Information, "1");
-            var logEvent2 = new LogEvent(Level.Error, "2");
+            var logEvent = new LogEvent(Level.Information, "1", new Exception("ex1"));
+            var logEvent2 = new LogEvent(Level.Error, "2", new Exception("ex2"));
             var expectedContent = JsonConvert.SerializeObject(logEvent, Formatting.Indented) + "," +
                 JsonConvert.SerializeObject(logEvent2, Formatting.Indented);
 

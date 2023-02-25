@@ -1,15 +1,20 @@
-﻿namespace SMLogging
+﻿using System.Xml.Serialization;
+
+namespace SMLogging
 {
+    [XmlInclude(typeof(Level))]
     public class LogEvent
     {
         private Level level;
         private string message;
         private Exception? exception;
 
-        public Level Level { get => level; private set => level = value; }
+        public Level Level { get => level; set => level = value; }
 
-        public string Message { get => message; private set => message = value; }
-        public Exception? Exception { get => exception; private set => exception = value; }
+        public string Message { get => message; set => message = value; }
+
+        [XmlIgnore]
+        public Exception? Exception { get => exception; set => exception = value; }
 
         public LogEvent(Level level, string message, Exception? exception)
         {
