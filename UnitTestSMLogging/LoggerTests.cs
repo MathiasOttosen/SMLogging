@@ -9,32 +9,47 @@ namespace UnitTestSMLogging
         public void Log_AboveMinimumLevel_LogToOutputIsCalled()
         {
             //Arrange
-            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
             var minimumLogLevel = Level.Information;
             var logLevel = Level.Error;
-            var logger = new Logger(mockLoggerOutput.Object, minimumLogLevel);
 
             //Act
-            logger.Log(logLevel);
+            var logger = new Logger(minimumLogLevel);
 
             //Assert
-            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+            Assert.Equal(logger.IsAboveMinimumLoggingLevel(logLevel), true);
         }
 
         [Fact]
         public void Log_BelowMinimumLevel_LogToOutputIsNotCalled()
         {
             //Arrange
-            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
             var minimumLogLevel = Level.Error;
             var logLevel = Level.Information;
-            var logger = new Logger(mockLoggerOutput.Object, minimumLogLevel);
 
             //Act
-            logger.Log(logLevel);
+            var logger = new Logger(minimumLogLevel);
 
             //Assert
-            mockLoggerOutput.VerifyNoOtherCalls();
+            Assert.Equal(logger.IsAboveMinimumLoggingLevel(logLevel), false);
+        }
+
+        [Fact]
+        public void Log_WithConsoleOutputEnabled_LogIsWrittenToConsole()
+        {
+            // Arrange
+            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
+            var isConsoleOutputEnabled = true;
+            var loggerSettings = new LoggerSettings(isConsoleOutputEnabled);
+            var logLevel = Level.Verbose;
+            var logger = new Logger(loggerSettings, mockLoggerOutput.Object, logLevel);
+
+            // Act
+            logger.Log(logLevel, "");
+
+
+            // Assert
+            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+
         }
     }
 }
