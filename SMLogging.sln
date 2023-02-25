@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLogging", "SMLogging\SMLogging.csproj", "{A7ABDA7E-6F13-4EBF-A53A-CC9BA8E646CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLogging.Tests", "UnitTestSMLogging\SMLogging.Tests.csproj", "{CDCF67E5-BBE7-47EA-8850-E37366A9E293}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A7ABDA7E-6F13-4EBF-A53A-CC9BA8E646CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7ABDA7E-6F13-4EBF-A53A-CC9BA8E646CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7ABDA7E-6F13-4EBF-A53A-CC9BA8E646CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDCF67E5-BBE7-47EA-8850-E37366A9E293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCF67E5-BBE7-47EA-8850-E37366A9E293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDCF67E5-BBE7-47EA-8850-E37366A9E293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDCF67E5-BBE7-47EA-8850-E37366A9E293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
