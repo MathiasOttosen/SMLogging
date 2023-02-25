@@ -38,10 +38,48 @@ namespace UnitTestSMLogging
         {
             // Arrange
             Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
-            var isConsoleOutputEnabled = true;
-            var loggerSettings = new LoggerSettings(isConsoleOutputEnabled);
+            var loggerSettings = new LoggerSettings();
+            loggerSettings.ConsoleOutputEnabled = true;
             var logLevel = Level.Verbose;
-            var logger = new Logger(loggerSettings, mockLoggerOutput.Object, logLevel);
+            var logger = new Logger(loggerSettings, mockLoggerOutput.Object, It.IsAny<ILoggerOutput>(), It.IsAny<ILoggerOutput>(), logLevel);
+
+            // Act
+            logger.Log(logLevel, "");
+
+
+            // Assert
+            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+
+        }
+
+        [Fact]
+        public void Log_WithJsonOutputEnabled_LogIsWrittenToJsonFile()
+        {
+            // Arrange
+            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
+            var loggerSettings = new LoggerSettings();
+            loggerSettings.JsonOutputEnabled = true;
+            var logLevel = Level.Verbose;
+            var logger = new Logger(loggerSettings, It.IsAny<ILoggerOutput>(), mockLoggerOutput.Object, It.IsAny<ILoggerOutput>(), logLevel);
+
+            // Act
+            logger.Log(logLevel, "");
+
+
+            // Assert
+            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+
+        }
+
+        [Fact]
+        public void Log_WithXMLOutputEnabled_LogIsWrittenToXMLFile()
+        {
+            // Arrange
+            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
+            var loggerSettings = new LoggerSettings();
+            loggerSettings.XMLOutputEnabled = true;
+            var logLevel = Level.Verbose;
+            var logger = new Logger(loggerSettings, It.IsAny<ILoggerOutput>(), It.IsAny<ILoggerOutput>(), mockLoggerOutput.Object, logLevel);
 
             // Act
             logger.Log(logLevel, "");

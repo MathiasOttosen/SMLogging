@@ -4,10 +4,8 @@
     {
         public bool ConsoleOutputEnabled { get; set; }
 
-        public LoggerSettings() { }
+        public bool XMLOutputEnabled { get; set; }
 
-        public LoggerSettings(bool isConsoleOutputEnabled) {
-            ConsoleOutputEnabled = isConsoleOutputEnabled;
-        }
+        public bool JsonOutputEnabled { get; set; }
     }
 }
