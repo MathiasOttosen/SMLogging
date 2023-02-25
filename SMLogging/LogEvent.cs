@@ -18,6 +18,8 @@
             this.exception = exception;
         }
 
+        public LogEvent(Level level, string message) : this(level, message, null) { }
+
         public LogEvent(Exception? exception) : this(Level.Verbose, string.Empty, exception) { }
 
         public LogEvent(Level level) : this(level, string.Empty, null) { }

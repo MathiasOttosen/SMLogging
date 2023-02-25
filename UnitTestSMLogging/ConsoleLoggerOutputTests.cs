@@ -10,7 +10,6 @@ namespace UnitTestSMLogging
             // Arrange
             var loggerOutput = new ConsoleLoggerOutput();
             var logEvent = new LogEvent();
-            var expected = logEvent.ToString();
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
 

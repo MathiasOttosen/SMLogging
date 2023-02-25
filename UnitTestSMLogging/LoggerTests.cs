@@ -16,7 +16,7 @@ namespace UnitTestSMLogging
             var logger = new Logger(minimumLogLevel);
 
             //Assert
-            Assert.Equal(logger.IsAboveMinimumLoggingLevel(logLevel), true);
+            Assert.True(logger.IsAboveMinimumLoggingLevel(logLevel));
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace UnitTestSMLogging
             var logger = new Logger(minimumLogLevel);
 
             //Assert
-            Assert.Equal(logger.IsAboveMinimumLoggingLevel(logLevel), false);
+            Assert.False(logger.IsAboveMinimumLoggingLevel(logLevel));
         }
 
         [Fact]
