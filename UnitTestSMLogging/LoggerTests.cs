@@ -3,7 +3,7 @@ using SMLogging;
 
 namespace UnitTestSMLogging
 {
-    public class UnitTestSMLogging
+    public class LoggerTests
     {
         [Fact]
         public void Log_AboveMinimumLevel_LogToOutputIsCalled()
@@ -13,12 +13,12 @@ namespace UnitTestSMLogging
             var minimumLogLevel = Level.Information;
             var logLevel = Level.Error;
             var logger = new Logger(mockLoggerOutput.Object, minimumLogLevel);
-            
+
             //Act
-            logger.Log(logLevel, "");
+            logger.Log(logLevel);
 
             //Assert
-            mockLoggerOutput.Verify(d => d.LogToOutput(logLevel, ""));
+            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace UnitTestSMLogging
             var logger = new Logger(mockLoggerOutput.Object, minimumLogLevel);
 
             //Act
-            logger.Log(logLevel, "");
+            logger.Log(logLevel);
 
             //Assert
             mockLoggerOutput.VerifyNoOtherCalls();

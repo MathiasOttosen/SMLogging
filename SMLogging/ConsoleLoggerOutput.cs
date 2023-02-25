@@ -6,9 +6,9 @@
         {
         }
 
-        public void LogToOutput(Level level, string message)
+        public void LogToOutput(LogEvent logEvent)
         {
-            Console.WriteLine(level.ToString(), message);
+            Console.WriteLine(logEvent.Level.ToString());
         }
     }
 }

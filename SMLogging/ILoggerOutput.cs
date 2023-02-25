@@ -3,6 +3,6 @@
     public interface ILoggerOutput
     {
 
-        public void LogToOutput(Level level, string message);
+        public void LogToOutput(LogEvent logEvent);
     }
 }

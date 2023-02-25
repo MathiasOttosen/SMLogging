@@ -11,15 +11,13 @@
             this.loggerOutput = loggerOutput;
         }
 
-        public void Log(Level level, string message)
+        public void Log(Level level)
         {
             if (level >= minimumLevel)
             {
                 // Log to selected output
-                loggerOutput.LogToOutput(level, message);  
+                loggerOutput.LogToOutput(new LogEvent(level));  
             }
         }
     }
-
-    public enum Level { Verbose, Debug, Information, Warning, Error, Fatal }
 }
