@@ -35,7 +35,7 @@ namespace SMLogging
 
         public override string ToString()
         {
-            return level.ToString() + message + exception;
+            return level.ToString() + " - " + message + " - " + exception;
         }
     }
 }

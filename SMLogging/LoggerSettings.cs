@@ -2,10 +2,6 @@
 {
     public class LoggerSettings
     {
-        public bool ConsoleOutputEnabled { get; set; }
-
-        public bool XMLOutputEnabled { get; set; }
-
-        public bool JsonOutputEnabled { get; set; }
+        public string Enabled { get; set; } = string.Empty;
     }
 }

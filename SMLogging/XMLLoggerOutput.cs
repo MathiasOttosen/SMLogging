@@ -36,7 +36,10 @@ namespace SMLogging
             writer.WriteStartElement(name);
             writer.WriteElementString("message", exception.Message);
             writer.WriteElementString("source", exception.Source);
-            WriteException(writer, "innerException", exception.InnerException);
+            if (exception.InnerException != null)
+            {
+                WriteException(writer, "innerException", exception.InnerException);
+            }
             writer.WriteEndElement();
         }
     }

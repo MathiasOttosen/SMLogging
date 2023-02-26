@@ -2,6 +2,11 @@
 {
     public class ConsoleLoggerOutput : ILoggerOutput
     {
+        public ConsoleLoggerOutput(string path)
+        {
+
+        }
+
         public ConsoleLoggerOutput()
         {
         }

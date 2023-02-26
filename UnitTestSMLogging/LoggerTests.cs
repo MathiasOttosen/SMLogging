@@ -34,60 +34,81 @@ namespace UnitTestSMLogging
         }
 
         [Fact]
-        public void Log_WithConsoleOutputEnabled_LogIsWrittenToConsole()
+        public void Logger_WithConsoleOutputEnabled_ConsoleLoggerOutputIsInstansiated()
         {
             // Arrange
-            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
             var loggerSettings = new LoggerSettings();
-            loggerSettings.ConsoleOutputEnabled = true;
-            var logLevel = Level.Verbose;
-            var logger = new Logger(loggerSettings, mockLoggerOutput.Object, It.IsAny<ILoggerOutput>(), It.IsAny<ILoggerOutput>(), logLevel);
-
+            loggerSettings.Enabled = "ConsoleLoggerOutput";
+            
             // Act
-            logger.Log(logLevel, "");
-
+            var logger = new Logger(loggerSettings);
 
             // Assert
-            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+            Assert.Equivalent(logger.Outputs.Count, 1);
+            Assert.Equal(typeof(ConsoleLoggerOutput), logger.Outputs.First().GetType());
+        }
+
+        [Fact]
+        public void Logger_WithJsonOutputEnabled_JsonLoggerOutputIsInstansiated()
+        {
+            // Arrange
+            var loggerSettings = new LoggerSettings();
+            loggerSettings.Enabled = "JsonLoggerOutput";
+
+            // Act
+            var logger = new Logger(loggerSettings);
+
+            // Assert
+            Assert.Equivalent(logger.Outputs.Count, 1);
+            Assert.Equal(typeof(JsonLoggerOutput), logger.Outputs.First().GetType());
 
         }
 
         [Fact]
-        public void Log_WithJsonOutputEnabled_LogIsWrittenToJsonFile()
+        public void Logger_WithXMLOutputEnabled_XMLLoggerOutputIsInstansiated()
         {
             // Arrange
-            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
             var loggerSettings = new LoggerSettings();
-            loggerSettings.JsonOutputEnabled = true;
-            var logLevel = Level.Verbose;
-            var logger = new Logger(loggerSettings, It.IsAny<ILoggerOutput>(), mockLoggerOutput.Object, It.IsAny<ILoggerOutput>(), logLevel);
+            loggerSettings.Enabled = "XMLLoggerOutput";
 
             // Act
-            logger.Log(logLevel, "");
-
+            var logger = new Logger(loggerSettings);
 
             // Assert
-            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
-
+            Assert.Equivalent(logger.Outputs.Count, 1);
+            Assert.Equal(typeof(XMLLoggerOutput), logger.Outputs.First().GetType());
         }
 
         [Fact]
-        public void Log_WithXMLOutputEnabled_LogIsWrittenToXMLFile()
+        public void Logger_WithMultipleOutputEnabled_MultipleLoggerOutputAreInstansiated()
         {
             // Arrange
-            Mock<ILoggerOutput> mockLoggerOutput = new Mock<ILoggerOutput>();
             var loggerSettings = new LoggerSettings();
-            loggerSettings.XMLOutputEnabled = true;
-            var logLevel = Level.Verbose;
-            var logger = new Logger(loggerSettings, It.IsAny<ILoggerOutput>(), It.IsAny<ILoggerOutput>(), mockLoggerOutput.Object, logLevel);
+            loggerSettings.Enabled = "ConsoleLoggerOutput,JsonLoggerOutput,XMLLoggerOutput";
 
             // Act
-            logger.Log(logLevel, "");
-
+            var logger = new Logger(loggerSettings);
 
             // Assert
-            mockLoggerOutput.Verify(d => d.LogToOutput(It.IsAny<LogEvent>()));
+            Assert.Equivalent(logger.Outputs.Count, 3);
+            Assert.True(logger.Outputs.Exists(x => x.GetType() == (typeof(ConsoleLoggerOutput))));
+            Assert.True(logger.Outputs.Exists(x => x.GetType() == (typeof(JsonLoggerOutput))));
+            Assert.True(logger.Outputs.Exists(x => x.GetType() == (typeof(XMLLoggerOutput))));
+        }
 
+        [Fact]
+        public void Logger_WithUnknownOutputEnabled_UnknownLoggerOutputAreInstansiated()
+        {
+            // Arrange
+            var loggerSettings = new LoggerSettings();
+            loggerSettings.Enabled = "MyLoggerOutput";
+
+            // Act
+            var logger = new Logger(loggerSettings);
+
+            // Assert
+            Assert.Equivalent(logger.Outputs.Count, 1);
+            Assert.True(logger.Outputs.Exists(x => x.GetType() == (typeof(UnknownLoggerOutput))));
         }
     }
 }

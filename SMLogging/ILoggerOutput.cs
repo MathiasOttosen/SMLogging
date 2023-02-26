@@ -2,7 +2,6 @@
 {
     public interface ILoggerOutput
     {
-
         public void LogToOutput(LogEvent logEvent);
     }
 }
