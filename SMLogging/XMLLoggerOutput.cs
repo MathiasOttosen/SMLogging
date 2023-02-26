@@ -24,24 +24,7 @@ namespace SMLogging
 
         public void LogToOutput(LogEvent logEvent)
         {
-            //var xmlString = string.Empty;
-            //if (Exists(Path))
-            //{
-            //    xmlString = ",";
-            //}
-            //xmlString += XmlConvert.SerializeObject(logEvent, Formatting.Indented);
-
-            
-
             var file = new StreamWriter(XMLFileName, true);
-
-            //if (logEvent.Exception != null)
-            //{
-            //    var xw = XmlWriter.Create(file);
-                
-            //    WriteException(xw, "exception", logEvent.Exception);
-                
-            //}
             var xmlConverter = new XmlSerializer(typeof(LogEvent));
             xmlConverter.Serialize(file, logEvent);
             file.Close();
@@ -56,10 +39,5 @@ namespace SMLogging
             WriteException(writer, "innerException", exception.InnerException);
             writer.WriteEndElement();
         }
-        public bool Exists(string path)
-        {
-            return File.Exists(path);
-        }
-
     }
 }
